@@ -6,7 +6,9 @@
     "extensions": [
         "ms-vscode.cpptools",
         "ms-vscode.cmake-tools",
-        "xaver.clang-format"
+        "xaver.clang-format",
+        "matepek.vscode-catch2-test-adapter",
+        "hbenl.vscode-test-explorer"
     ],
     "settings": {
         "editor.tokenColorCustomizations": {
