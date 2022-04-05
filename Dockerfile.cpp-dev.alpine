@@ -1,4 +1,4 @@
-FROM markuseggenbauer/cpp-base:latest
+FROM markuseggenbauer/cpp-base.alpine:latest
 
 RUN apk add --no-cache \
     git \
