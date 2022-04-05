@@ -1,0 +1,38 @@
+{
+    "name": "c++ development container",
+    "image":"markuseggenbauer/cpp-dev",
+	"runArgs": ["--cap-add=SYS_PTRACE", "--cap-add=NET_ADMIN", "--security-opt", "seccomp=unconfined"],
+    "remoteUser": "developer",
+    "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "xaver.clang-format"
+    ],
+    "settings": {
+        "editor.tokenColorCustomizations": {
+            "comments": "#d0d000"
+        },
+        "editor.minimap.enabled": false,
+        "cmake.configureOnEdit": false,
+        "cmake.parallelJobs": 8,
+        "cmake.saveBeforeBuild": true,
+        "cmake.configureArgs": [
+            "-DCMAKE_CXX_COMPILER_LAUNCHER=ccache",
+            "-DCMAKE_MODULE_PATH=${workspaceFolder}/build"
+        ],
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "xaver.clang-format",
+        "clang-format.executable": "/usr/bin/clang-format",
+        "editor.rulers": [
+            120
+        ],
+        "files.trimFinalNewlines": true,
+        "files.insertFinalNewline": true,
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.env.linux": {
+            "EDITOR": "code -w -r"
+        },
+        "terminal.integrated.copyOnSelection": true,
+        "terminal.integrated.shellIntegration.enabled": true
+       }
+}

@@ -1,0 +1,20 @@
+FROM alpine:3.15
+
+RUN apk add --no-cache \
+    ninja \
+    cmake
+
+RUN apk add --no-cache \
+    g++
+
+RUN apk add --no-cache \
+    clang-extra-tools \
+    cppcheck \
+    py-pip \
+    && pip install --no-input --no-cache-dir cpplint \
+    && pip install --no-input --no-cache-dir conan \
+    && pip install --no-input --no-cache-dir cmake-format
+
+RUN conan config set general.cmake_generator=Ninja
+RUN conan profile new default --detect
+RUN conan profile update settings.compiler.libcxx=libstdc++11 default
