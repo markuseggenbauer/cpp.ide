@@ -3,6 +3,12 @@
     "image":"markuseggenbauer/cpp-dev.alpine:latest",
 	"runArgs": ["--cap-add=SYS_PTRACE", "--cap-add=NET_ADMIN", "--security-opt", "seccomp=unconfined"],
     "remoteUser": "developer",
+    "overrideCommand": false,
+    "mounts": [
+        "source=${localWorkspaceFolder}/.container_cache,target=/cache,type=bind,consistency=cached"
+    ],
+    "initializeCommand":
+        "mkdir -m 777 -p ${localWorkspaceFolder}/.container_cache",
     "extensions": [
         "ms-vscode.cpptools",
         "ms-vscode.cmake-tools",

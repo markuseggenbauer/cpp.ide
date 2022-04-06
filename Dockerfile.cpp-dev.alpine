@@ -28,4 +28,5 @@ RUN apk del curl
 USER developer
 WORKDIR /home/developer
 
-ENTRYPOINT ["/bin/sh", "-c", "while sleep 1000; do :; done"]
+COPY --chown=developer:developer ["scripts/", "./scripts/"]
+CMD ["scripts/startup.sh"]
