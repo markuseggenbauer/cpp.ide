@@ -3,10 +3,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - Dockerfile.cpp-base.alpine
-      - Dockerfile.cpp-dev.alpine
-  workflow_dispatch:
     
 jobs:
   docker:
@@ -28,7 +24,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       -
-        name: Build and push base
+        name: Build and push alpine base
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -37,7 +33,7 @@ jobs:
           push: true
           tags: markuseggenbauer/cpp-base.alpine:latest
       -
-        name: Build and push dev
+        name: Build and push alpine dev
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -45,3 +41,21 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: markuseggenbauer/cpp-dev.alpine:latest
+      -
+        name: Build and push debian base
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: Dockerfile.cpp-base
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: markuseggenbauer/cpp-base:latest
+      -
+        name: Build and push debian dev
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: Dockerfile.cpp-dev
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: markuseggenbauer/cpp-dev:latest

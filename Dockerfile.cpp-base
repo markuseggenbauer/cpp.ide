@@ -1,0 +1,26 @@
+FROM debian:11-slim
+
+RUN apt-get update && apt-get install -y \
+    ninja-build \
+    cmake \
+    && rm -rf /var/cache/apt/lists
+
+RUN apt-get update && apt-get install -y \
+    g++ \
+    && rm -rf /var/cache/apt/lists
+
+RUN apt-get update && apt-get install -y \
+    clang-format \
+    clang-tidy \
+    cppcheck \
+    python3-pip \
+    && pip install --no-input --no-cache-dir cpplint \
+    && pip install --no-input --no-cache-dir conan \
+    && pip install --no-input --no-cache-dir cmake-format \
+    && apt-get remove -y python3-pip \
+    && apt-get autoremove -y \
+    && rm -rf /var/cache/apt/lists
+
+RUN conan config set general.cmake_generator=Ninja
+RUN conan profile new default --detect
+RUN conan profile update settings.compiler.libcxx=libstdc++11 default

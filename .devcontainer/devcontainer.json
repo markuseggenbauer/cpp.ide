@@ -1,6 +1,6 @@
 {
     "name": "c++ development container",
-    "image":"markuseggenbauer/cpp-dev.alpine:latest",
+    "image":"markuseggenbauer/cpp-dev:latest",
 	"runArgs": ["--cap-add=SYS_PTRACE", "--cap-add=NET_ADMIN", "--security-opt", "seccomp=unconfined"],
     "remoteUser": "developer",
     "overrideCommand": false,
@@ -12,9 +12,13 @@
     "extensions": [
         "ms-vscode.cpptools",
         "ms-vscode.cmake-tools",
+        "notskm.clang-tidy",
         "xaver.clang-format",
+        "cheshirekow.cmake-format",
         "matepek.vscode-catch2-test-adapter",
-        "hbenl.vscode-test-explorer"
+        "hbenl.vscode-test-explorer",
+        "eamodio.gitlens",
+        "mhutchie.git-graph"
     ],
     "settings": {
         "editor.tokenColorCustomizations": {
@@ -30,6 +34,9 @@
         ],
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "xaver.clang-format",
+        "[cmake]": {
+            "editor.defaultFormatter": "cheshirekow.cmake-format"
+        },    
         "clang-format.executable": "/usr/bin/clang-format",
         "editor.rulers": [
             120

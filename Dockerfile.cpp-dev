@@ -1,0 +1,32 @@
+FROM markuseggenbauer/cpp-base:latest
+
+RUN apt-get update && apt-get install -y \
+    git \
+    gdb \
+    ccache \
+    && rm -rf /var/cache/apt/lists
+
+# install and configure user interface
+RUN apt-get update && apt-get install -y \
+    curl \
+    zsh \
+    sudo \
+    && adduser --disabled-password --gecos "" developer \
+    && adduser developer sudo \
+    && echo "%sudo  ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers \
+    && su developer \
+    && sh -c "$(curl -L https://github.com/deluan/zsh-in-docker/releases/download/v1.1.2/zsh-in-docker.sh)" -- \
+        -t "af-magic" \
+        -p "git" \
+    && apt-get remove -y curl \
+    && apt-get autoremove -y \
+    && rm -rf /var/cache/apt/lists
+    
+USER developer
+WORKDIR /home/developer
+
+RUN conan config set general.cmake_generator=Ninja
+RUN conan profile new default --detect
+RUN conan profile update settings.compiler.libcxx=libstdc++11 default
+
+ENTRYPOINT ["/bin/sh", "-c", "while sleep 1000; do :; done"]
