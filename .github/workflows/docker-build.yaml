@@ -23,25 +23,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      -
-        name: Build and push alpine base
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: Dockerfile.cpp-base.alpine
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: markuseggenbauer/cpp-base.alpine:latest
-      -
-        name: Build and push alpine dev
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: Dockerfile.cpp-dev.alpine
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: markuseggenbauer/cpp-dev.alpine:latest
-      -
         name: Build and push debian base
         uses: docker/build-push-action@v2
         with:
