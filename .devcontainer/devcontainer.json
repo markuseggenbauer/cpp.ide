@@ -19,7 +19,7 @@
         "hbenl.vscode-test-explorer",
         "eamodio.gitlens",
         "mhutchie.git-graph",
-        "onjayamanne.python-extension-pack"
+        "ms-python.python"    
     ],
     "settings": {
         "editor.tokenColorCustomizations": {
