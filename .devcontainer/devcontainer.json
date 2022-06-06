@@ -18,7 +18,8 @@
         "matepek.vscode-catch2-test-adapter",
         "hbenl.vscode-test-explorer",
         "eamodio.gitlens",
-        "mhutchie.git-graph"
+        "mhutchie.git-graph",
+        "onjayamanne.python-extension-pack"
     ],
     "settings": {
         "editor.tokenColorCustomizations": {
