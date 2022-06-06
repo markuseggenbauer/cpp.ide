@@ -31,4 +31,8 @@ RUN conan config set general.cmake_generator=Ninja
 RUN conan profile new default --detect
 RUN conan profile update settings.compiler.libcxx=libstdc++11 default
 
-ENTRYPOINT ["/bin/sh", "-c", "while sleep 1000; do :; done"]
+COPY --chown=developer:developer ["scripts/startup.sh", "scripts/"]
+COPY --chown=developer:developer ["scripts/startup/", "scripts/startup/"]
+
+ENTRYPOINT ["/bin/sh", "./scripts/startup.sh"]
+CMD ["/bin/sh", "-c", "while sleep 1000; do :; done"]
